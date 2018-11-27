@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">NeualVisualizer</string>
+    <string name="app_name">NeuralVisualizer</string>
     <string name="start">Start</string>
+    <string name="test">Test</string>
 </resources>
