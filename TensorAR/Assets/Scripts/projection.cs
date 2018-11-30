@@ -13,11 +13,12 @@ public class projection : MonoBehaviour
 
     void Update()
     {
+        transform.Translate(Time.deltaTime, Time.deltaTime, Time.deltaTime);
     }
 
     private void Awake()
     {
-        DrawImages(100);
+        DrawImages(1000);
     }
 
     private byte[][] LoadTrainImages(int number)
@@ -69,7 +70,7 @@ public class projection : MonoBehaviour
         {
             var image = new GameObject(String.Format("image-{0}", i), typeof(SpriteRenderer));
             var transform = image.GetComponent<Transform>();
-            transform.position = new Vector3(i / 10, i % 10, 10);
+            transform.position = new Vector3(i / 10 % 10, i % 10, i / 100 + 5);
             transform.localScale = new Vector3(4, 4, 4);
             transform.rotation = new Quaternion(180, 0, 0, 1);
             var sprite = Utils.Bytes2Sprite(images[i], ROWS, COLS);
