@@ -7,6 +7,10 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import com.xuebingli.proto.Algorithm
+import com.xuebingli.proto.Dataset
+import com.xuebingli.proto.ReduceGrpc
+import com.xuebingli.proto.ReduceRequest
 import com.xuebingli.tensorar.UnityPlayerActivity
 import dagger.android.support.DaggerAppCompatActivity
 import io.grpc.ManagedChannel
@@ -45,11 +49,23 @@ class MainActivity : DaggerAppCompatActivity() {
         return true
     }
 
+    private fun reduceDimension() {
+        val reduceService = ReduceGrpc.newBlockingStub(channel)
+        val request = ReduceRequest.newBuilder().setAlgorithm(Algorithm.TSNE)
+                .setDataset(Dataset.MNIST).setDimention(3).setNumber(800).build()
+        val reply = reduceService.reduceDimention(request)
+        Toast.makeText(this, reply.toString(), Toast.LENGTH_SHORT).show()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle item selection
         return when (item.itemId) {
             R.id.test -> {
                 test()
+                true
+            }
+            R.id.reduce_dimension -> {
+                reduceDimension()
                 true
             }
             else -> super.onOptionsItemSelected(item)
