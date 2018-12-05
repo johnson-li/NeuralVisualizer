@@ -194,8 +194,8 @@ namespace HuaweiARUnitySDK
             const int BYTES_IN_KBYTE = 1024;
 
             // TODO:: Remove this log when all errors/warnings are moved to stderr for CLI tool.
-            ARDebug.LogError("Built AugmentedImageDatabase '{0}' ({1} Images, {2} KBytes)", name, m_Images.Count,
-                m_RawData.Length / BYTES_IN_KBYTE);
+//            ARDebug.LogError("Built AugmentedImageDatabase '{0}' ({1} Images, {2} KBytes)", name, m_Images.Count,
+//                m_RawData.Length / BYTES_IN_KBYTE);
         }
 
         public List<ARAugmentedImageDatabaseEntry> GetDirtyQualityEntries()
@@ -264,7 +264,7 @@ namespace HuaweiARUnitySDK
             }
             else
             {
-                binaryName = "augmented_image_cli_win";
+                binaryName = "augmented_image_cli_osx";
             }
 
             string[] cliBinaryGuid = AssetDatabase.FindAssets(binaryName);

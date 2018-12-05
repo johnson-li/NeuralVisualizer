@@ -1,1 +1,1 @@
-include ':app', ':TensorAR-lib'
+include ':app'

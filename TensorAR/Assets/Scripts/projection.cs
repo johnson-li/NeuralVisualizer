@@ -2,18 +2,19 @@
 using TensorAR;
 using UnityEngine;
 
-public class projection : MonoBehaviour
+public class Projection : MonoBehaviour
 {
     private static int ROWS = 28;
     private static int COLS = 28;
 
-    void Start()
-    {
-    }
-
     void Update()
     {
-        transform.Translate(Time.deltaTime, Time.deltaTime, Time.deltaTime);
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
+//        transform.Translate(Time.deltaTime, Time.deltaTime, Time.deltaTime);
     }
 
     private void Awake()

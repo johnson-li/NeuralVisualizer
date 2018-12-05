@@ -57,6 +57,13 @@ namespace HuaweiARUnitySDK.Examples.AugmentedImage
         /// </summary>
         public GameObject FrameUpperRight;
 
+        public GameObject tmp;
+
+        public void Awake()
+        {
+            tmp = new GameObject("tmp", typeof(SpriteRenderer));
+        }
+
         /// <summary>
         /// The Unity Update method.
         /// </summary>
@@ -77,14 +84,28 @@ namespace HuaweiARUnitySDK.Examples.AugmentedImage
             {
                 //arengine GetExtentX&GetExtentZ() isn't changing when camera moving,so using Image.GetCenterPose to move FrameLowerLeft etc.
                 Quaternion poseRotation = Image.GetCenterPose().rotation;
-                FrameLowerLeft.transform.position = poseRotation * ((halfWidth * Vector3.left) + (halfHeight * Vector3.back)) + Image.GetCenterPose().position;
+                FrameLowerLeft.transform.position =
+                    poseRotation * ((halfWidth * Vector3.left) + (halfHeight * Vector3.back)) +
+                    Image.GetCenterPose().position;
                 FrameLowerLeft.transform.rotation = poseRotation;
-                FrameLowerRight.transform.position = poseRotation * ((halfWidth * Vector3.right) + (halfHeight * Vector3.back)) + Image.GetCenterPose().position;
+                FrameLowerRight.transform.position =
+                    poseRotation * ((halfWidth * Vector3.right) + (halfHeight * Vector3.back)) +
+                    Image.GetCenterPose().position;
                 FrameLowerRight.transform.rotation = poseRotation;
-                FrameUpperLeft.transform.position = poseRotation * ((halfWidth * Vector3.left) + (halfHeight * Vector3.forward)) + Image.GetCenterPose().position;
-                FrameUpperLeft.transform.rotation = poseRotation; 
-                FrameUpperRight.transform.position = poseRotation * ((halfWidth * Vector3.right) + (halfHeight * Vector3.forward)) + Image.GetCenterPose().position;
+                FrameUpperLeft.transform.position =
+                    poseRotation * ((halfWidth * Vector3.left) + (halfHeight * Vector3.forward)) +
+                    Image.GetCenterPose().position;
+                FrameUpperLeft.transform.rotation = poseRotation;
+                FrameUpperRight.transform.position =
+                    poseRotation * ((halfWidth * Vector3.right) + (halfHeight * Vector3.forward)) +
+                    Image.GetCenterPose().position;
                 FrameUpperRight.transform.rotation = poseRotation;
+
+                tmp.transform.position = Image.GetCenterPose().position;
+                tmp.transform.rotation = Image.GetCenterPose().rotation;
+                tmp.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                tmp.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/psyduck");
+                tmp.SetActive(true);
             }
             else
             {
@@ -94,7 +115,8 @@ namespace HuaweiARUnitySDK.Examples.AugmentedImage
                 FrameUpperLeft.transform.localPosition = (halfWidth * Vector3.left) + (halfHeight * Vector3.forward);
                 FrameUpperRight.transform.localPosition = (halfWidth * Vector3.right) + (halfHeight * Vector3.forward);
             }
-            ARDebug.LogInfo("image position {0} rotation {1} width {2} height {3}", Image.GetCenterPose().position, 
+
+            ARDebug.LogInfo("image position {0} rotation {1} width {2} height {3}", Image.GetCenterPose().position,
                 Image.GetCenterPose().rotation, halfWidth, halfHeight);
 
             FrameLowerLeft.SetActive(true);

@@ -192,8 +192,11 @@
     <Compile Include="Assets\HuaweiARUnitySDK\Scripts\Utility\ValueLegalityChecker.cs" />
     <Compile Include="Assets\HuaweiARUnitySDK\Scripts\WaitForAsynTaskCompletionYieldInstruction.cs" />
     <Compile Include="Assets\PluginWrapper.cs" />
+    <Compile Include="Assets\Scripts\AugmentedController.cs" />
+    <Compile Include="Assets\Scripts\AugmentedVisualizer.cs" />
     <Compile Include="Assets\Scripts\BinaryReader.cs" />
-    <Compile Include="Assets\Scripts\projection.cs" />
+    <Compile Include="Assets\Scripts\ImageCloud.cs" />
+    <Compile Include="Assets\Scripts\Projection.cs" />
     <Compile Include="Assets\Scripts\Utils.cs" />
     <None Include="Assets\Examples\Common\Materials\Shaders\PointCloud.shader" />
     <None Include="Assets\Examples\Common\Materials\Shaders\PlaneGrid.shader" />

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9896578bc82ea134fa18278b2c2065d7, type: 3}
+  m_Name: New Database
+  m_EditorClassIdentifier: 
+  m_Images:
+  - Name: android
+    Width: 0
+    Quality: 
+    TextureGUID: d099e9abd83da4b45a41adaf03682a9e
+  - Name: despicable
+    Width: 0
+    Quality: 95
+    TextureGUID: f88f11388edb14353954e5f43d750be9
+  - Name: lufyMeat
+    Width: 0
+    Quality: 60
+    TextureGUID: 7d9dc46966ea54e018a07c2c911e544f
+  - Name: nn
+    Width: 0
+    Quality: 100
+    TextureGUID: d66853a9877a342388c5d440b7397870
+  - Name: psyduck
+    Width: 0
+    Quality: 20
+    TextureGUID: df17b9a16449f48cdb74c593ee01ee57
+  m_RawData: 
+  m_IsRawDataDirty: 0
+  m_CliVersion: 1.2

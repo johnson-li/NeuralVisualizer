@@ -5,10 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 0
     path: Assets/Examples/3DHandSample/3DHandAR.unity
     guid: ba5c275d7b378654fb012f35ffee5849
+  - enabled: 0
+    path: Assets/Examples/AugmentedImage/Scenes/AugmentedImage.unity
+    guid: 8e1258e545e697b49933746b26c103f4
+  - enabled: 1
+    path: Assets/Scenes/HuaweiScene.unity
+    guid: 36a4c15a9b9a54198943ac353f3081aa
   m_configObjects: {}

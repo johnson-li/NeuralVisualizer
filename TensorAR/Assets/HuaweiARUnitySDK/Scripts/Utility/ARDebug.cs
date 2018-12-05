@@ -1,4 +1,4 @@
-﻿//#define __DEBUG__
+﻿#define __DEBUG__
 namespace HuaweiARInternal
 {
 
