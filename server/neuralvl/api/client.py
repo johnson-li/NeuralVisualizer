@@ -17,7 +17,7 @@ from __future__ import print_function
 
 import grpc
 
-from neuralvl.data import helloworld_pb2, helloworld_pb2_grpc
+from neuralvl.data import helloworld_pb2, helloworld_pb2_grpc, dim_pb2, dim_pb2_grpc
 import neuralvl.config as config
 
 
@@ -26,9 +26,11 @@ def run():
     # used in circumstances in which the with statement does not fit the needs
     # of the code.
     with grpc.insecure_channel('localhost:%d' % config.PORT) as channel:
-        stub = helloworld_pb2_grpc.GreeterStub(channel)
-        response = stub.SayHello(helloworld_pb2.HelloRequest(name='you'))
-    print("Greeter client received: " + response.message)
+        stub = dim_pb2_grpc.ReduceStub(channel)
+        response = stub.ReduceDimention(
+            dim_pb2.ReduceRequest(algorithm=dim_pb2.Algorithm.Value('TSNE'), dataset=dim_pb2.Dataset.Value('MNIST'),
+                                  number=1000, dimention=2))
+    print("Dim client received: " + str(response))
 
 
 if __name__ == '__main__':
