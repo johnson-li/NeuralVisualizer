@@ -39,8 +39,6 @@ namespace TensorAR
 
         public void Update()
         {
-            ARDebug.LogInfo("Overlay position: " + FitToScanOverlay.transform.position);
-            ARDebug.LogInfo("Overlay rotation: " + FitToScanOverlay.transform.rotation);
             if (ARFrame.GetTrackingState() != ARTrackable.TrackingState.TRACKING)
             {
                 ARDebug.LogInfo("GetTrackingState no tracing return <<");
@@ -61,13 +59,12 @@ namespace TensorAR
                 if (image.GetTrackingState() == ARTrackable.TrackingState.TRACKING && imageCloud != null)
                 {
                     imageCloud.image = image;
-                    ARDebug.LogInfo("update position {0} rotation {1}", image.GetCenterPose().position,
-                        image.GetCenterPose().rotation);
                 }
 
                 if (image.GetTrackingState() == ARTrackable.TrackingState.TRACKING && imageCloud == null)
                 {
-                    imageCloud = Instantiate(imageCloudPrototype, image.GetCenterPose().position, image.GetCenterPose().rotation);
+                    imageCloud = Instantiate(imageCloudPrototype, image.GetCenterPose().position,
+                        image.GetCenterPose().rotation);
                     ARDebug.LogInfo("create position {0} rotation {1}", image.GetCenterPose().position,
                         image.GetCenterPose().rotation);
                     imageCloud.image = image;
