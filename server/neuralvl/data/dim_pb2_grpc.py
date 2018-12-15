@@ -14,7 +14,7 @@ class ReduceStub(object):
     Args:
       channel: A grpc.Channel.
     """
-    self.ReduceDimention = channel.unary_unary(
+    self.ReduceDimention = channel.unary_stream(
         '/neural.Reduce/ReduceDimention',
         request_serializer=neuralvl_dot_data_dot_dim__pb2.ReduceRequest.SerializeToString,
         response_deserializer=neuralvl_dot_data_dot_dim__pb2.ReduceReply.FromString,
@@ -35,7 +35,7 @@ class ReduceServicer(object):
 
 def add_ReduceServicer_to_server(servicer, server):
   rpc_method_handlers = {
-      'ReduceDimention': grpc.unary_unary_rpc_method_handler(
+      'ReduceDimention': grpc.unary_stream_rpc_method_handler(
           servicer.ReduceDimention,
           request_deserializer=neuralvl_dot_data_dot_dim__pb2.ReduceRequest.FromString,
           response_serializer=neuralvl_dot_data_dot_dim__pb2.ReduceReply.SerializeToString,

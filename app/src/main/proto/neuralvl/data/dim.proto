@@ -20,7 +20,7 @@ option java_outer_classname = "DimProto";
 package neural;
 
 service Reduce {
-    rpc ReduceDimention (ReduceRequest) returns (ReduceReply) {
+    rpc ReduceDimention (ReduceRequest) returns (stream ReduceReply) {
     }
 }
 
@@ -35,6 +35,7 @@ message ReduceReply {
     ReduceRequest request = 1;
     repeated Point2D points2 = 2;
     repeated Point3D points3 = 3;
+    int32 iteration = 4;
 }
 
 message Point2D {

@@ -13,7 +13,7 @@
 # limitations under the License.
 """The Python implementation of the GRPC helloworld.Greeter server."""
 
-from neuralvl import config, dim_reduce
+from neuralvl import config, dim_reduce, utils
 from concurrent import futures
 import time
 
@@ -33,13 +33,16 @@ class Greeter(helloworld_pb2_grpc.GreeterServicer):
 class Dim(dim_pb2_grpc.ReduceServicer):
 
     def ReduceDimention(self, request, context):
-        result = dim_reduce.reduce(dim_pb2.Algorithm.Name(request.algorithm), request.number,
-                                   dim_pb2.Dataset.Name(request.dataset), request.dimention)
-        if request.dimention == 2:
-            return dim_pb2.ReduceReply(request=request, points2=[dim_pb2.Point2D(x=p[0], y=p[1]) for p in result])
-        elif request.dimention == 3:
-            return dim_pb2.ReduceReply(request=request,
-                                       points3=[dim_pb2.Point3D(x=p[0], y=p[1], z=p[2]) for p in result])
+        print(request)
+        for index, result in enumerate(dim_reduce.reduce(dim_pb2.Algorithm.Name(request.algorithm), request.number,
+                                                         dim_pb2.Dataset.Name(request.dataset), request.dimention)):
+            if request.dimention == 2:
+                yield dim_pb2.ReduceReply(request=request, iteration=index,
+                                          points2=[dim_pb2.Point2D(x=p[0], y=p[1]) for p in utils.normalize(result)])
+            elif request.dimention == 3:
+                yield dim_pb2.ReduceReply(request=request, iteration=index,
+                                          points3=[dim_pb2.Point3D(x=p[0], y=p[1], z=p[2]) for p in
+                                                   utils.normalize(result)])
 
 
 def serve():

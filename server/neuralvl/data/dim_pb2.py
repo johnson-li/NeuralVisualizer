@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='neural',
   syntax='proto3',
   serialized_options=_b('\n\023com.xuebingli.protoB\010DimProtoP\001'),
-  serialized_pb=_b('\n\x17neuralvl/data/dim.proto\x12\x06neural\"z\n\rReduceRequest\x12 \n\x07\x64\x61taset\x18\x01 \x01(\x0e\x32\x0f.neural.Dataset\x12$\n\talgorithm\x18\x02 \x01(\x0e\x32\x11.neural.Algorithm\x12\x0e\n\x06number\x18\x03 \x01(\x05\x12\x11\n\tdimention\x18\x04 \x01(\x05\"y\n\x0bReduceReply\x12&\n\x07request\x18\x01 \x01(\x0b\x32\x15.neural.ReduceRequest\x12 \n\x07points2\x18\x02 \x03(\x0b\x32\x0f.neural.Point2D\x12 \n\x07points3\x18\x03 \x03(\x0b\x32\x0f.neural.Point3D\"\x1f\n\x07Point2D\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\"*\n\x07Point3D\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02*\x1e\n\tAlgorithm\x12\x07\n\x03PCA\x10\x00\x12\x08\n\x04TSNE\x10\x01*\x14\n\x07\x44\x61taset\x12\t\n\x05MNIST\x10\x00\x32I\n\x06Reduce\x12?\n\x0fReduceDimention\x12\x15.neural.ReduceRequest\x1a\x13.neural.ReduceReply\"\x00\x42!\n\x13\x63om.xuebingli.protoB\x08\x44imProtoP\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x17neuralvl/data/dim.proto\x12\x06neural\"z\n\rReduceRequest\x12 \n\x07\x64\x61taset\x18\x01 \x01(\x0e\x32\x0f.neural.Dataset\x12$\n\talgorithm\x18\x02 \x01(\x0e\x32\x11.neural.Algorithm\x12\x0e\n\x06number\x18\x03 \x01(\x05\x12\x11\n\tdimention\x18\x04 \x01(\x05\"\x8c\x01\n\x0bReduceReply\x12&\n\x07request\x18\x01 \x01(\x0b\x32\x15.neural.ReduceRequest\x12 \n\x07points2\x18\x02 \x03(\x0b\x32\x0f.neural.Point2D\x12 \n\x07points3\x18\x03 \x03(\x0b\x32\x0f.neural.Point3D\x12\x11\n\titeration\x18\x04 \x01(\x05\"\x1f\n\x07Point2D\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\"*\n\x07Point3D\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02*\x1e\n\tAlgorithm\x12\x07\n\x03PCA\x10\x00\x12\x08\n\x04TSNE\x10\x01*\x14\n\x07\x44\x61taset\x12\t\n\x05MNIST\x10\x00\x32K\n\x06Reduce\x12\x41\n\x0fReduceDimention\x12\x15.neural.ReduceRequest\x1a\x13.neural.ReduceReply\"\x00\x30\x01\x42!\n\x13\x63om.xuebingli.protoB\x08\x44imProtoP\x01\x62\x06proto3')
 )
 
 _ALGORITHM = _descriptor.EnumDescriptor(
@@ -40,8 +40,8 @@ _ALGORITHM = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=359,
-  serialized_end=389,
+  serialized_start=379,
+  serialized_end=409,
 )
 _sym_db.RegisterEnumDescriptor(_ALGORITHM)
 
@@ -59,8 +59,8 @@ _DATASET = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=391,
-  serialized_end=411,
+  serialized_start=411,
+  serialized_end=431,
 )
 _sym_db.RegisterEnumDescriptor(_DATASET)
 
@@ -151,6 +151,13 @@ _REDUCEREPLY = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='iteration', full_name='neural.ReduceReply.iteration', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -163,8 +170,8 @@ _REDUCEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=159,
-  serialized_end=280,
+  serialized_start=160,
+  serialized_end=300,
 )
 
 
@@ -201,8 +208,8 @@ _POINT2D = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=282,
-  serialized_end=313,
+  serialized_start=302,
+  serialized_end=333,
 )
 
 
@@ -246,8 +253,8 @@ _POINT3D = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=315,
-  serialized_end=357,
+  serialized_start=335,
+  serialized_end=377,
 )
 
 _REDUCEREQUEST.fields_by_name['dataset'].enum_type = _DATASET
@@ -300,8 +307,8 @@ _REDUCE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=413,
-  serialized_end=486,
+  serialized_start=433,
+  serialized_end=508,
   methods=[
   _descriptor.MethodDescriptor(
     name='ReduceDimention',
