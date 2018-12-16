@@ -42,10 +42,10 @@ public class UnityActivity extends UnityPlayerActivity {
     AndroidInjection.inject(this);
     super.onCreate(savedInstanceState);
 
-    showLabel = Prefs.getBoolean("showLabel", true);
-    labelNumber = Prefs.getInt("labelNumber", 10);
-    imageNumber = Prefs.getInt("imageNumber", 100);
-    dimensions = Prefs.getInt("dimensions", 3);
+    showLabel = Prefs.getBoolean(Cons.SHOW_LABEL, true);
+    labelNumber = Prefs.getInt(Cons.LABEL_NUMBER, 10);
+    imageNumber = Prefs.getInt(Cons.IMAGE_NUMBER, 100);
+    dimensions = Prefs.getInt(Cons.DIMENSION, 3);
   }
 
   public float[][] getPoints(int iteration) {
@@ -57,7 +57,8 @@ public class UnityActivity extends UnityPlayerActivity {
         ReduceRequest.newBuilder()
             .setAlgorithm(Algorithm.TSNE)
             .setDataset(Dataset.MNIST)
-            .setNumber(300)
+            .setLabelNumber(labelNumber)
+            .setImageNumber(imageNumber)
             .setDimention(3)
             .build();
 

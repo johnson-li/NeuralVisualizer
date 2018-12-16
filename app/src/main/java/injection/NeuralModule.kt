@@ -20,9 +20,4 @@ class NeuralModule {
     fun provideChannel(): ManagedChannel {
         return ManagedChannelBuilder.forAddress(BuildConfig.ServerIP, BuildConfig.ServerPort).usePlaintext().build()
     }
-
-    @Provides
-    @Singleton
-    fun provideSharedPreferences() {
-    }
 }

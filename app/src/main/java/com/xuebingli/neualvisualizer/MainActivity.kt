@@ -2,14 +2,11 @@ package com.xuebingli.neualvisualizer
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import com.xuebingli.proto.Algorithm
-import com.xuebingli.proto.Dataset
-import com.xuebingli.proto.ReduceGrpc
-import com.xuebingli.proto.ReduceRequest
 import dagger.android.support.DaggerAppCompatActivity
 import io.grpc.ManagedChannel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -25,6 +22,9 @@ class MainActivity : DaggerAppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(toolbar)
+        container.setHasFixedSize(true)
+        container.layoutManager = LinearLayoutManager(this)
+        container.adapter = ItemAdapter()
     }
 
     fun click(view: View) {
@@ -33,10 +33,10 @@ class MainActivity : DaggerAppCompatActivity() {
     }
 
     private fun test() {
-        val request = ReduceRequest.newBuilder().setNumber(100).setDimention(3)
-                .setDataset(Dataset.MNIST).setAlgorithm(Algorithm.TSNE).build()
-        val reduceService = ReduceGrpc.newBlockingStub(channel)
-        val reply = reduceService.reduceDimention(request)
+//        val request = ReduceRequest.newBuilder().(100).setDimention(3)
+//                .setDataset(Dataset.MNIST).setAlgorithm(Algorithm.TSNE).build()
+//        val reduceService = ReduceGrpc.newBlockingStub(channel)
+//        val reply = reduceService.reduceDimention(request)
 //        Toast.makeText(this, reply.points3List.toString(), Toast.LENGTH_SHORT).show()
     }
 

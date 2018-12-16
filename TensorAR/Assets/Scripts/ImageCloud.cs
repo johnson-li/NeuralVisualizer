@@ -25,6 +25,12 @@ public class ImageCloud : MonoBehaviour
     private List<float[]> pointsLocation = new List<float[]>();
     private float scale = 100;
 
+    private static Color[] COLORS = new[]
+    {
+        Color.red, Color.blue, Color.green, Color.yellow, Color.grey, Color.black, Color.cyan, Color.yellow,
+        Color.green, Color.magenta
+    };
+
     private void Awake()
     {
         FirstPersonCamera = GameObject.Find("First Person Camera");
@@ -65,9 +71,9 @@ public class ImageCloud : MonoBehaviour
                 for (int c = 0; c < cols; c++)
                 {
                     var k = r * cols + c;
-                    images[index][4 * k] = 0xff;
-                    images[index][4 * k + 1] = 0xff;
-                    images[index][4 * k + 2] = 0xff;
+                    images[index][4 * k] = (byte) (0xff * COLORS[label].r);
+                    images[index][4 * k + 1] = (byte) (0xff * COLORS[label].g);
+                    images[index][4 * k + 2] = (byte) (0xff * COLORS[label].b);
                     images[index][4 * k + 3] = img[(rows - r - 1) * cols + c];
                 }
             }
