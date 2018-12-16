@@ -25,7 +25,7 @@ service Reduce {
 }
 
 message ReduceRequest {
-    Dataset dataset = 1;
+    string dataset = 1;
     Algorithm algorithm = 2;
     int32 labelNumber = 3;
     int32 imageNumber = 4;
@@ -56,6 +56,3 @@ enum Algorithm {
     TSNE = 1;
 }
 
-enum Dataset {
-    MNIST = 0;
-}
