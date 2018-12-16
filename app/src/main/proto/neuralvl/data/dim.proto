@@ -27,8 +27,9 @@ service Reduce {
 message ReduceRequest {
     Dataset dataset = 1;
     Algorithm algorithm = 2;
-    int32 number = 3;
-    int32 dimention = 4;
+    int32 labelNumber = 3;
+    int32 imageNumber = 4;
+    int32 dimention = 5;
 }
 
 message ReduceReply {

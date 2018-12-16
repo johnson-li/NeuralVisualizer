@@ -6,7 +6,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import com.xuebingli.proto.Algorithm
 import com.xuebingli.proto.Dataset
 import com.xuebingli.proto.ReduceGrpc
@@ -38,7 +37,7 @@ class MainActivity : DaggerAppCompatActivity() {
                 .setDataset(Dataset.MNIST).setAlgorithm(Algorithm.TSNE).build()
         val reduceService = ReduceGrpc.newBlockingStub(channel)
         val reply = reduceService.reduceDimention(request)
-        Toast.makeText(this, reply.points3List.toString(), Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this, reply.points3List.toString(), Toast.LENGTH_SHORT).show()
     }
 
 

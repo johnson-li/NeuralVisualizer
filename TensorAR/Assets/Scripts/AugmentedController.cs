@@ -37,6 +37,12 @@ namespace TensorAR
 
         private List<ARAugmentedImage> augmentedImages = new List<ARAugmentedImage>();
 
+        private void Awake()
+        {
+//            var imageCloud = new ImageCloud();
+//            imageCloud.LoadTrainImages(1000);
+        }
+
         public void Update()
         {
             if (ARFrame.GetTrackingState() != ARTrackable.TrackingState.TRACKING)

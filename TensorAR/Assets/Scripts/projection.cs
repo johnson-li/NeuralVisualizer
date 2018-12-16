@@ -72,7 +72,7 @@ public class Projection : MonoBehaviour
             var image = new GameObject(String.Format("image-{0}", i), typeof(SpriteRenderer));
             var transform = image.GetComponent<Transform>();
             transform.position = new Vector3(i / 10 % 10, i % 10, i / 100 + 5);
-            transform.localScale = new Vector3(4, 4, 4);
+//            transform.localScale = new Vector3(4, 4, 4);
             transform.rotation = new Quaternion(180, 0, 0, 1);
             var sprite = Utils.Bytes2Sprite(images[i], ROWS, COLS);
             image.GetComponent<SpriteRenderer>().sprite = sprite;
