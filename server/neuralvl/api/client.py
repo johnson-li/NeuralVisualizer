@@ -28,8 +28,8 @@ def run():
     with grpc.insecure_channel('localhost:%d' % config.PORT) as channel:
         stub = dim_pb2_grpc.ReduceStub(channel)
         for response in stub.ReduceDimention(
-                dim_pb2.ReduceRequest(algorithm=dim_pb2.Algorithm.Value('TSNE'), dataset=dim_pb2.Dataset.Value('MNIST'),
-                                      number=300, dimention=3)):
+                dim_pb2.ReduceRequest(algorithm=dim_pb2.Algorithm.Value('TSNE'), dataset='fashion',
+                                      labelNumber=3, imageNumber=100, dimention=3, iteration=1000)):
             print("Dim client received: " + str(response))
 
 

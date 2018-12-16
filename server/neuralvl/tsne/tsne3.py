@@ -10,7 +10,7 @@ os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 np.random.seed(6278)
 tf.set_random_seed(6728)
 beta1, beta2, adam_e = 0.9, 0.999, 1e-8
-num_epoch = 100
+num_epoch = 800
 print_size = 10
 learning_rate = 0.00009
 
@@ -285,73 +285,8 @@ class TSNE_Layer():
 # ================= LAYER CLASSES =================
 
 # data
-mnist = input_data.read_data_sets('Dataset/MNIST/', one_hot=False)
-x_data, train_label, test_batch, test_label = mnist.train.images, mnist.train.labels, mnist.test.images, mnist.test.labels
-#mnist = tf.keras.datasets.mnist
-#(x_data, train_label), (test_batch, test_label) = mnist.load_data()
-# x_data = x_data.reshape(-1, 28, 28, 1)  # 28x28x1 input img
-# y_data = y_data.reshape(-1, 28, 28, 1)  # 28x28x1 input img
-# train_batch = np.zeros((55000,28,28,1))
-# test_batch = np.zeros((10000,28,28,1))
-
-# for x in range(len(x_data)):
-#     train_batch[x,:,:,:] = np.expand_dims(imresize(x_data[x,:,:,0],(28,28)),axis=3)
-# for x in range(len(y_data)):
-#     test_batch[x,:,:,:] = np.expand_dims(imresize(y_data[x,:,:,0],(28,28)),axis=3)
-
-# 1. Prepare only one and only zero
-number_images = 100
-only_0_index = np.asarray(np.where(test_label == 0))[:, :number_images]
-only_1_index = np.asarray(np.where(test_label == 1))[:, :number_images]
-only_2_index = np.asarray(np.where(test_label == 2))[:, :number_images]
-only_3_index = np.asarray(np.where(test_label == 3))[:, :number_images]
-only_4_index = np.asarray(np.where(test_label == 4))[:, :number_images]
-only_5_index = np.asarray(np.where(test_label == 5))[:, :number_images]
-only_6_index = np.asarray(np.where(test_label == 6))[:, :number_images]
-only_7_index = np.asarray(np.where(test_label == 7))[:, :number_images]
-only_8_index = np.asarray(np.where(test_label == 8))[:, :number_images]
-only_9_index = np.asarray(np.where(test_label == 9))[:, :number_images]
-
-# # 1.5 prepare Label
-only_0_label = test_label[only_0_index].T
-only_1_label = test_label[only_1_index].T
-only_2_label = test_label[only_2_index].T
-only_3_label = test_label[only_3_index].T
-only_4_label = test_label[only_4_index].T
-only_5_label = test_label[only_5_index].T
-only_6_label = test_label[only_6_index].T
-only_7_label = test_label[only_7_index].T
-only_8_label = test_label[only_8_index].T
-only_9_label = test_label[only_9_index].T
-train_label = np.vstack((only_0_label, only_1_label,
-                         only_2_label, only_3_label,
-                         only_4_label, only_5_label,
-                         only_6_label, only_7_label,
-                         only_8_label, only_9_label))
-train_label = np.squeeze(train_label)
-
-# # 2. prepare matrix image
-only_0_image = np.squeeze(test_batch[only_0_index])
-only_1_image = np.squeeze(test_batch[only_1_index])
-only_2_image = np.squeeze(test_batch[only_2_index])
-only_3_image = np.squeeze(test_batch[only_3_index])
-only_4_image = np.squeeze(test_batch[only_4_index])
-only_5_image = np.squeeze(test_batch[only_5_index])
-only_6_image = np.squeeze(test_batch[only_6_index])
-only_7_image = np.squeeze(test_batch[only_7_index])
-only_8_image = np.squeeze(test_batch[only_8_index])
-only_9_image = np.squeeze(test_batch[only_9_index])
-train_batch = np.vstack((only_0_image, only_1_image,
-                         only_2_image, only_3_image,
-                         only_4_image, only_5_image,
-                         only_6_image, only_7_image,
-                         only_8_image, only_9_image))
-# train_batch = x_data.reshape(-1, 28, 28, 1)  # 28x28x1 input img
-
-# print out the data shape
-print(train_batch.shape)
-print(train_label.shape)
-print(train_batch.max(), train_batch.min())
+#mnist = input_data.read_data_sets('Dataset/MNIST/', one_hot=False, validation_size=0)
+#image_train, label_train, test_batch, test_label = mnist.train.images, mnist.train.labels, mnist.test.images, mnist.test.labels
 
 
 # ======= TSNE ======
@@ -449,11 +384,32 @@ def p_joint(X, target_perplexity):
 
 
 class TSNE:
-    def __init__(self):
+    def __init__(self, labelNumber, imageNumber, dimension, iteration, dataset):
+        if dataset == 'mnist':
+            mnist = tf.keras.datasets.mnist
+        elif dataset == 'fashion':
+            mnist = tf.keras.datasets.fashion_mnist
+        (image_train, label_train), (test_batch, test_label) = mnist.load_data()
+        image_train = image_train.reshape((image_train.shape[0], -1))
+        image_train = image_train.astype(np.float32)
+        image_train = image_train / 0xff
+        print("shape of x: " + str(image_train.shape))
+
+        number_images = imageNumber
+        indexes = [np.asarray(np.where(label_train == i))[:, :number_images] for i in range(10)]
+        labels = [label_train[i].T for i in indexes][:labelNumber]
+        self.train_label = np.vstack(labels)
+        self.train_label = np.squeeze(self.train_label)
+        images = [np.squeeze(image_train[i]) for i in indexes][:labelNumber]
+        self.train_batch = np.vstack(images)
+
+        self.iteration = iteration
+        self.label_number = labelNumber
+        self.image_number = imageNumber
         self.perplexity_number = 30
-        self.reduced_dimension = 3
-        self.number_of_example = train_batch.shape[0]
-        self.P = p_joint(train_batch.reshape([self.number_of_example, -1]), self.perplexity_number)
+        self.reduced_dimension = dimension
+        self.number_of_example = self.train_batch.shape[0]
+        self.P = p_joint(self.train_batch.reshape([self.number_of_example, -1]), self.perplexity_number)
 
         self.l0 = FNN(784, 256, act=tf_elu, d_act=d_tf_elu)
         self.l1 = FNN(256, 128, act=tf_elu, d_act=d_tf_elu)
@@ -480,23 +436,19 @@ class TSNE:
         self.grad_update = self.grad_l3_up + self.grad_l2_up + self.grad_l1_up + self.grad_l0_up
 
     def train(self):
+
         with tf.Session() as sess:
-            print(num_epoch)
             sess.run(tf.global_variables_initializer())
-            for iter in range(num_epoch):
-                print(iter)
-                sess_results = sess.run([self.cost, self.grad_update, self.layer3], feed_dict={self.x: train_batch.astype(np.float64)})
+            for iter in range(self.iteration):
+                sess_results = sess.run([self.cost, self.grad_update, self.layer3], feed_dict={self.x: self.train_batch.astype(np.float64)})
                 temp_w = sess_results[2]
                 yield temp_w
-                #print('current iter: ', iter, ' Current Cost:  ', sess_results[0], end='\r')
+                print('current iter: ', iter, ' Current Cost:  ', sess_results[0], end='\r')
                 if iter % print_size == 0:
                     print('\n-----------------------------\n')
 
-            w = sess.run(self.layer3, feed_dict={self.x: train_batch.astype(np.float64)})
-            yield w
-
 
 if __name__ == '__main__':
-    tsne = TSNE()
+    tsne = TSNE(3, 100, 3, 1000, 'fashion')
     for w in tsne.train():
-        print(w)
+        pass

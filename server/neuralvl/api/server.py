@@ -34,8 +34,9 @@ class Dim(dim_pb2_grpc.ReduceServicer):
 
     def ReduceDimention(self, request, context):
         print(request)
-        for index, result in enumerate(dim_reduce.reduce(dim_pb2.Algorithm.Name(request.algorithm), request.number,
-                                                         dim_pb2.Dataset.Name(request.dataset), request.dimention)):
+        for index, result in enumerate(dim_reduce.reduce(dim_pb2.Algorithm.Name(request.algorithm), request.labelNumber,
+                                                         request.imageNumber, request.dataset, request.dimention,
+                                                         request.iteration)):
             if request.dimention == 2:
                 yield dim_pb2.ReduceReply(request=request, iteration=index,
                                           points2=[dim_pb2.Point2D(x=p[0], y=p[1]) for p in utils.normalize(result)])

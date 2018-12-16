@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='neural',
   syntax='proto3',
   serialized_options=_b('\n\023com.xuebingli.protoB\010DimProtoP\001'),
-  serialized_pb=_b('\n\x17neuralvl/data/dim.proto\x12\x06neural\"z\n\rReduceRequest\x12 \n\x07\x64\x61taset\x18\x01 \x01(\x0e\x32\x0f.neural.Dataset\x12$\n\talgorithm\x18\x02 \x01(\x0e\x32\x11.neural.Algorithm\x12\x0e\n\x06number\x18\x03 \x01(\x05\x12\x11\n\tdimention\x18\x04 \x01(\x05\"\x8c\x01\n\x0bReduceReply\x12&\n\x07request\x18\x01 \x01(\x0b\x32\x15.neural.ReduceRequest\x12 \n\x07points2\x18\x02 \x03(\x0b\x32\x0f.neural.Point2D\x12 \n\x07points3\x18\x03 \x03(\x0b\x32\x0f.neural.Point3D\x12\x11\n\titeration\x18\x04 \x01(\x05\"\x1f\n\x07Point2D\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\"*\n\x07Point3D\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02*\x1e\n\tAlgorithm\x12\x07\n\x03PCA\x10\x00\x12\x08\n\x04TSNE\x10\x01*\x14\n\x07\x44\x61taset\x12\t\n\x05MNIST\x10\x00\x32K\n\x06Reduce\x12\x41\n\x0fReduceDimention\x12\x15.neural.ReduceRequest\x1a\x13.neural.ReduceReply\"\x00\x30\x01\x42!\n\x13\x63om.xuebingli.protoB\x08\x44imProtoP\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x17neuralvl/data/dim.proto\x12\x06neural\"\x96\x01\n\rReduceRequest\x12\x0f\n\x07\x64\x61taset\x18\x01 \x01(\t\x12$\n\talgorithm\x18\x02 \x01(\x0e\x32\x11.neural.Algorithm\x12\x13\n\x0blabelNumber\x18\x03 \x01(\x05\x12\x13\n\x0bimageNumber\x18\x04 \x01(\x05\x12\x11\n\tdimention\x18\x05 \x01(\x05\x12\x11\n\titeration\x18\x06 \x01(\x05\"\x8c\x01\n\x0bReduceReply\x12&\n\x07request\x18\x01 \x01(\x0b\x32\x15.neural.ReduceRequest\x12 \n\x07points2\x18\x02 \x03(\x0b\x32\x0f.neural.Point2D\x12 \n\x07points3\x18\x03 \x03(\x0b\x32\x0f.neural.Point3D\x12\x11\n\titeration\x18\x04 \x01(\x05\"\x1f\n\x07Point2D\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\"*\n\x07Point3D\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02*\x1e\n\tAlgorithm\x12\x07\n\x03PCA\x10\x00\x12\x08\n\x04TSNE\x10\x01\x32K\n\x06Reduce\x12\x41\n\x0fReduceDimention\x12\x15.neural.ReduceRequest\x1a\x13.neural.ReduceReply\"\x00\x30\x01\x42!\n\x13\x63om.xuebingli.protoB\x08\x44imProtoP\x01\x62\x06proto3')
 )
 
 _ALGORITHM = _descriptor.EnumDescriptor(
@@ -40,34 +40,14 @@ _ALGORITHM = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=379,
-  serialized_end=409,
+  serialized_start=408,
+  serialized_end=438,
 )
 _sym_db.RegisterEnumDescriptor(_ALGORITHM)
 
 Algorithm = enum_type_wrapper.EnumTypeWrapper(_ALGORITHM)
-_DATASET = _descriptor.EnumDescriptor(
-  name='Dataset',
-  full_name='neural.Dataset',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='MNIST', index=0, number=0,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=411,
-  serialized_end=431,
-)
-_sym_db.RegisterEnumDescriptor(_DATASET)
-
-Dataset = enum_type_wrapper.EnumTypeWrapper(_DATASET)
 PCA = 0
 TSNE = 1
-MNIST = 0
 
 
 
@@ -80,8 +60,8 @@ _REDUCEREQUEST = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='dataset', full_name='neural.ReduceRequest.dataset', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -93,15 +73,29 @@ _REDUCEREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='number', full_name='neural.ReduceRequest.number', index=2,
+      name='labelNumber', full_name='neural.ReduceRequest.labelNumber', index=2,
       number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='dimention', full_name='neural.ReduceRequest.dimention', index=3,
+      name='imageNumber', full_name='neural.ReduceRequest.imageNumber', index=3,
       number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='dimention', full_name='neural.ReduceRequest.dimention', index=4,
+      number=5, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='iteration', full_name='neural.ReduceRequest.iteration', index=5,
+      number=6, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -118,8 +112,8 @@ _REDUCEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=35,
-  serialized_end=157,
+  serialized_start=36,
+  serialized_end=186,
 )
 
 
@@ -170,8 +164,8 @@ _REDUCEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=160,
-  serialized_end=300,
+  serialized_start=189,
+  serialized_end=329,
 )
 
 
@@ -208,8 +202,8 @@ _POINT2D = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=302,
-  serialized_end=333,
+  serialized_start=331,
+  serialized_end=362,
 )
 
 
@@ -253,11 +247,10 @@ _POINT3D = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=335,
-  serialized_end=377,
+  serialized_start=364,
+  serialized_end=406,
 )
 
-_REDUCEREQUEST.fields_by_name['dataset'].enum_type = _DATASET
 _REDUCEREQUEST.fields_by_name['algorithm'].enum_type = _ALGORITHM
 _REDUCEREPLY.fields_by_name['request'].message_type = _REDUCEREQUEST
 _REDUCEREPLY.fields_by_name['points2'].message_type = _POINT2D
@@ -267,7 +260,6 @@ DESCRIPTOR.message_types_by_name['ReduceReply'] = _REDUCEREPLY
 DESCRIPTOR.message_types_by_name['Point2D'] = _POINT2D
 DESCRIPTOR.message_types_by_name['Point3D'] = _POINT3D
 DESCRIPTOR.enum_types_by_name['Algorithm'] = _ALGORITHM
-DESCRIPTOR.enum_types_by_name['Dataset'] = _DATASET
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ReduceRequest = _reflection.GeneratedProtocolMessageType('ReduceRequest', (_message.Message,), dict(
@@ -307,8 +299,8 @@ _REDUCE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=433,
-  serialized_end=508,
+  serialized_start=440,
+  serialized_end=515,
   methods=[
   _descriptor.MethodDescriptor(
     name='ReduceDimention',

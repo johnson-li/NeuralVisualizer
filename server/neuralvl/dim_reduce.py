@@ -17,12 +17,12 @@ import neuralvl.tsne.tsne3 as tsne3
 #    plt.show()
 
 
-def tsne(x, y, dimension):
+def tsne(labelNumber, imageNumber, dimension, iteration, dataset):
     # print("Computing t-SNE embedding")
     # tsne_model = manifold.TSNE(n_components=dimension, init='pca', random_state=0)
     # x_tsne = tsne_model.fit_transform(x)
     # return normalize(x_tsne)
-    yield from tsne3.TSNE().train()
+    yield from tsne3.TSNE(labelNumber, imageNumber, dimension, iteration, dataset).train()
 
 
 def load_dataset(number, dataset):
@@ -37,12 +37,10 @@ def load_dataset(number, dataset):
 #        return x, y
 
 
-def reduce(algorithm, number, dataset, dimension):
+def reduce(algorithm, labelNumber, imageNumber, dataset, dimension, iteration):
     if algorithm == 'TSNE':
         algorithm = tsne
-    # x, y = load_dataset(number, dataset)
-    x, y = 0, 0
-    yield from algorithm(x, y, dimension)
+    yield from algorithm(labelNumber, imageNumber, dimension, iteration, dataset)
 
 
 def main():
@@ -54,4 +52,14 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    #main()
+    from sklearn import manifold
+    import tensorflow as tf
+    import numpy as np
+    from neuralvl import utils
+    tsne_model = manifold.TSNE(n_components=3, init='pca', random_state=0)
+    (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
+    x = x_train[:100]
+    x = np.array([a.flatten() for a in x])
+    x_tsne = tsne_model.fit_transform(x)
+    print(utils.normalize(x_tsne))
