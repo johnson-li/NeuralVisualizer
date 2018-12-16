@@ -17,6 +17,7 @@ public class ImageCloud : MonoBehaviour
     private bool showLabel = true;
     private int labelNumber;
     private int imageNumber;
+    private string dataset;
     private GameObject[] points;
     private byte[][] images;
     private int maxIteration = -1;
@@ -39,11 +40,17 @@ public class ImageCloud : MonoBehaviour
         DrawImages();
     }
 
-    private byte[][] LoadTrainImages()
+    public byte[][] LoadTrainImages()
     {
         var indexes = new int[10];
-        var trainImage = Utils.LoadBinary("MNIST/train-images-idx3-ubyte");
-        var trainLabel = Utils.LoadBinary("MNIST/train-labels-idx1-ubyte");
+        var prefix = "MNIST";
+        if (dataset == "fashion")
+        {
+            prefix = "Fashion";
+        }
+
+        var trainImage = Utils.LoadBinary(prefix + "/train-images-idx3-ubyte");
+        var trainLabel = Utils.LoadBinary(prefix + "/train-labels-idx1-ubyte");
         var magic = trainImage.ReadInt32();
         Debug.Assert(magic == 0x00000803);
         magic = trainLabel.ReadInt32();
@@ -90,6 +97,7 @@ public class ImageCloud : MonoBehaviour
         showLabel = activity.Get<bool>("showLabel");
         imageNumber = activity.Get<int>("imageNumber");
         labelNumber = activity.Get<int>("labelNumber");
+        dataset = activity.Get<string>("dataset");
         images = LoadTrainImages();
         points = new GameObject[imageNumber * labelNumber];
         for (var i = 0; i < points.Length; i++)

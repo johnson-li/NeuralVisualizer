@@ -12,7 +12,7 @@ class ItemAdapter : RecyclerView.Adapter<ItemViewHolder>() {
 
     val items = arrayOf(Item("Label number", Cons.LABEL_NUMBER),
             Item("Image number", Cons.IMAGE_NUMBER), Item("Show labels", Cons.SHOW_LABEL),
-            Item("Iteration", Cons.ITERATION))
+            Item("Iteration", Cons.ITERATION), Item("Dataset", Cons.DATASET))
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ItemViewHolder {
         val view = LayoutInflater.from(p0.context).inflate(R.layout.item_view, p0, false)
@@ -63,6 +63,16 @@ class ItemAdapter : RecyclerView.Adapter<ItemViewHolder>() {
                 p0.itemView.rootView.setOnClickListener {
                     AlertDialog.Builder(p0.itemView.context).setItems(choices, { dialog, which ->
                         Prefs.putInt(Cons.ITERATION, choices[which].toInt())
+                        notifyItemChanged(p1)
+                    }).setTitle(title.text).create().show()
+                }
+            }
+            4 -> {
+                content.text = Prefs.getString(Cons.DATASET, "mnist")
+                val choices = arrayOf("mnist", "fashion")
+                p0.itemView.rootView.setOnClickListener {
+                    AlertDialog.Builder(p0.itemView.context).setItems(choices, { dialog, which ->
+                        Prefs.putString(Cons.DATASET, choices[which])
                         notifyItemChanged(p1)
                     }).setTitle(title.text).create().show()
                 }

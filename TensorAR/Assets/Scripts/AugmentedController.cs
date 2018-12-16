@@ -40,7 +40,7 @@ namespace TensorAR
         private void Awake()
         {
 //            var imageCloud = new ImageCloud();
-//            imageCloud.LoadTrainImages(1000);
+//            imageCloud.LoadTrainImages();
         }
 
         public void Update()

@@ -22,7 +22,7 @@ import io.grpc.stub.StreamObserver;
 
 public class UnityActivity extends UnityPlayerActivity {
 
-  public static final int MAX_ITERATION = 1000;
+  public static final int MAX_ITERATION = 4000;
   public List<float[][]> points = new ArrayList<>();
   public int iteration = -1;
   @Inject public ManagedChannel channel;
@@ -31,6 +31,7 @@ public class UnityActivity extends UnityPlayerActivity {
   private int imageNumber;
   private int dimensions;
   private int maxIteration;
+  private String dataset;
 
   {
     for (int i = 0; i < MAX_ITERATION; i++) {
@@ -48,6 +49,7 @@ public class UnityActivity extends UnityPlayerActivity {
     imageNumber = Prefs.getInt(Cons.IMAGE_NUMBER, 100);
     dimensions = Prefs.getInt(Cons.DIMENSION, 3);
     maxIteration = Prefs.getInt(Cons.ITERATION, 1000);
+    dataset = Prefs.getString(Cons.DATASET, "mnist");
   }
 
   public float[][] getPoints(int iteration) {
@@ -58,7 +60,7 @@ public class UnityActivity extends UnityPlayerActivity {
     ReduceRequest request =
         ReduceRequest.newBuilder()
             .setAlgorithm(Algorithm.TSNE)
-            .setDataset(Dataset.MNIST)
+            .setDataset(dataset)
             .setIteration(maxIteration)
             .setLabelNumber(labelNumber)
             .setImageNumber(imageNumber)
