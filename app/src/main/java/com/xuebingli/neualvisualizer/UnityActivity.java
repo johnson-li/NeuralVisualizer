@@ -30,6 +30,7 @@ public class UnityActivity extends UnityPlayerActivity {
   private int labelNumber;
   private int imageNumber;
   private int dimensions;
+  private int maxIteration;
 
   {
     for (int i = 0; i < MAX_ITERATION; i++) {
@@ -46,6 +47,7 @@ public class UnityActivity extends UnityPlayerActivity {
     labelNumber = Prefs.getInt(Cons.LABEL_NUMBER, 10);
     imageNumber = Prefs.getInt(Cons.IMAGE_NUMBER, 100);
     dimensions = Prefs.getInt(Cons.DIMENSION, 3);
+    maxIteration = Prefs.getInt(Cons.ITERATION, 1000);
   }
 
   public float[][] getPoints(int iteration) {
@@ -57,6 +59,7 @@ public class UnityActivity extends UnityPlayerActivity {
         ReduceRequest.newBuilder()
             .setAlgorithm(Algorithm.TSNE)
             .setDataset(Dataset.MNIST)
+            .setIteration(maxIteration)
             .setLabelNumber(labelNumber)
             .setImageNumber(imageNumber)
             .setDimention(3)

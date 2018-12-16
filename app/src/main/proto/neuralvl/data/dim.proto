@@ -30,6 +30,7 @@ message ReduceRequest {
     int32 labelNumber = 3;
     int32 imageNumber = 4;
     int32 dimention = 5;
+    int32 iteration = 6;
 }
 
 message ReduceReply {

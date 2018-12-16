@@ -11,7 +11,8 @@ import com.pixplicity.easyprefs.library.Prefs
 class ItemAdapter : RecyclerView.Adapter<ItemViewHolder>() {
 
     val items = arrayOf(Item("Label number", Cons.LABEL_NUMBER),
-            Item("Image number", Cons.IMAGE_NUMBER), Item("Show labels", Cons.SHOW_LABEL))
+            Item("Image number", Cons.IMAGE_NUMBER), Item("Show labels", Cons.SHOW_LABEL),
+            Item("Iteration", Cons.ITERATION))
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ItemViewHolder {
         val view = LayoutInflater.from(p0.context).inflate(R.layout.item_view, p0, false)
@@ -52,6 +53,16 @@ class ItemAdapter : RecyclerView.Adapter<ItemViewHolder>() {
                 p0.itemView.rootView.setOnClickListener {
                     AlertDialog.Builder(p0.itemView.context).setItems(choices, { dialog, which ->
                         Prefs.putBoolean(Cons.SHOW_LABEL, choices[which].toBoolean())
+                        notifyItemChanged(p1)
+                    }).setTitle(title.text).create().show()
+                }
+            }
+            3 -> {
+                content.text = Prefs.getInt(Cons.ITERATION, 1000).toString()
+                val choices = arrayOf("500", "1000", "2000", "4000")
+                p0.itemView.rootView.setOnClickListener {
+                    AlertDialog.Builder(p0.itemView.context).setItems(choices, { dialog, which ->
+                        Prefs.putInt(Cons.ITERATION, choices[which].toInt())
                         notifyItemChanged(p1)
                     }).setTitle(title.text).create().show()
                 }
